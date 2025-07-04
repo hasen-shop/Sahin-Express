@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar">
 <head>
@@ -198,13 +199,14 @@
     const filtered = allProducts.filter(p => p.category === category);
 
     filtered.forEach(product => {
+      const safeName = product.name.replace(/'/g, "\'");
       const div = document.createElement("div");
       div.className = "product";
       div.innerHTML = `
         <img src="${product.image}" alt="${product.name}">
         <h3>${product.name}</h3>
         <p>السعر: ${product.price} ليرة</p>
-        <button onclick="addToCart('${product.name}', ${product.price})">أضف للسلة</button>
+        <button onclick="addToCart('${safeName}', ${product.price})">أضف للسلة</button>
       `;
       productContainer.appendChild(div);
     });
@@ -212,6 +214,15 @@
 
   // عرض أولي - الإلكترونيات
   filterProducts('electronics');
+
+  // تحسين تجربة المستخدم: إغلاق السلة عند الضغط خارجها
+  window.addEventListener('click', function(e) {
+    const cartBox = document.getElementById("cart-details");
+    const cartBtn = document.querySelector(".cart");
+    if (!cartBox.contains(e.target) && !cartBtn.contains(e.target)) {
+      cartBox.style.display = "none";
+    }
+  });
 </script>
 
 </body>
