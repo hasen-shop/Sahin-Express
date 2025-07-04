@@ -9,11 +9,11 @@
       font-family: 'Tahoma', sans-serif;
       margin: 0;
       padding: 0;
-      background: #f1f1f1;
+      background: rgb(241, 241, 241); /* بدلاً من #f1f1f1 */
       direction: rtl;
     }
     header {
-      background: linear-gradient(to left, #2c3e50, #34495e);
+      background: linear-gradient(to left, rgb(44, 62, 80), rgb(52, 73, 94)); /* بدلاً من #2c3e50 و #34495e */
       color: white;
       padding: 20px;
       text-align: center;
@@ -21,14 +21,14 @@
       font-weight: bold;
     }
     nav {
-      background: #ecf0f1;
+      background: rgb(236, 240, 241); /* بدلاً من #ecf0f1 */
       display: flex;
       justify-content: center;
       padding: 10px;
       gap: 15px;
     }
     nav button {
-      background: #3498db;
+      background: rgb(52, 152, 219); /* بدلاً من #3498db */
       color: white;
       border: none;
       padding: 10px 15px;
@@ -43,7 +43,7 @@
       gap: 20px;
     }
     .product {
-      background: white;
+      background: rgb(255, 255, 255); /* بدلاً من white */
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       padding: 15px;
@@ -60,7 +60,7 @@
       border-radius: 6px;
     }
     .product button {
-      background: #27ae60;
+      background: rgb(39, 174, 96); /* بدلاً من #27ae60 */
       color: white;
       border: none;
       padding: 10px 15px;
@@ -73,70 +73,38 @@
       position: fixed;
       bottom: 20px;
       left: 20px;
-      background: #2980b9;
+      background: rgb(41, 128, 185); /* بدلاً من #2980b9 */
       color: white;
       padding: 15px;
       border-radius: 10px;
       font-size: 16px;
+      cursor: pointer;
     }
-  </style>
-</head>
-<body>
-
-<header>🛍️ شاهين إكسبريس | Sahin Express</header>
-
-<nav>
-  <button onclick="filterProducts('electronics')">📱 إلكترونيات</button>
-  <button onclick="filterProducts('fashion')">👗 ملابس وأزياء</button>
-  <button onclick="filterProducts('home')">🏠 المنزل والمطبخ</button>
-</nav>
-
-<div class="container" id="products">
-  <!-- المنتجات ستظهر هنا -->
-</div>
-
-<div class="cart" id="cart">🛒 السلة: 0 منتج</div>
-
-<script>
-  const allProducts = [
-    { name: "هاتف سامسونج مستعمل", price: 2000, category: "electronics", image: "https://via.placeholder.com/300x200?text=هاتف" },
-    { name: "لاب توب HP بحالة جيدة", price: 3500, category: "electronics", image: "https://via.placeholder.com/300x200?text=لاب+توب" },
-     { name: "كمبيوتر بحالة جيدة ", price: 5000, category: "electronics", image: "https://via.placeholder.com/300x200?text=كمبيوتر" },
-    { name: "جاكيت جلد رجالي", price: 300, category: "fashion", image: "https://via.placeholder.com/300x200?text=جاكيت" },
-    { name: "فستان سهرة", price: 250, category: "fashion", image: "https://via.placeholder.com/300x200?text=فستان" },
-    { name: "خلاط كهربائي", price: 150, category: "home", image: "https://via.placeholder.com/300x200?text=خلاط" },
-    { name: "طقم صحون 12 قطعة", price: 120, category: "home", image: "https://via.placeholder.com/300x200?text=صحون" }
-  ];
-
-  let cartCount = 0;
-
-  function filterProducts(category) {
-    const productContainer = document.getElementById("products");
-    productContainer.innerHTML = "";
-
-    const filtered = allProducts.filter(p => p.category === category);
-
-    filtered.forEach(product => {
-      const div = document.createElement("div");
-      div.className = "product";
-      div.innerHTML = `
-        <img src="${product.image}" alt="${product.name}">
-        <h3>${product.name}</h3>
-        <p>السعر: ${product.price} ليرة</p>
-        <button onclick="addToCart()">أضف للسلة</button>
-      `;
-      productContainer.appendChild(div);
-    });
-  }
-
-  function addToCart() {
-    cartCount++;
-    document.getElementById("cart").innerText = `🛒 السلة: ${cartCount} منتج`;
-  }
-
-  // عرض أولي - الإلكترونيات
-  filterProducts('electronics');
-</script>
-
-</body>
-</html>
+    .cart-details {
+      position: fixed;
+      bottom: 80px;
+      left: 20px;
+      background: rgb(255, 255, 255);
+      color: rgb(51, 51, 51);
+      border: 1px solid rgb(204, 204, 204);
+      border-radius: 10px;
+      max-height: 300px;
+      overflow-y: auto;
+      width: 300px;
+      display: none;
+      z-index: 999;
+    }
+    .cart-details ul {
+      list-style: none;
+      padding: 10px;
+      margin: 0;
+    }
+    .cart-details li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      border-bottom: 1px solid rgb(238, 238, 238);
+      padding-bottom: 5px;
+    }
+    .cart-details
