@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>شاهين إكسبريس | Sahin Express</title>
+  <style>
+    body {
+      font-family: 'Tahoma', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f1f1f1;
+      direction: rtl;
+    }
+    header {
+      background: linear-gradient(to left, #2c3e50, #34495e);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    nav {
+      background: #ecf0f1;
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+      gap: 15px;
+    }
+    nav button {
+      background: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .container {
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .product {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 15px;
+      text-align: center;
+      transition: 0.3s;
+    }
+    .product:hover {
+      transform: translateY(-5px);
+    }
+    .product img {
+      max-width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+    .product button {
+      background: #27ae60;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      margin-top: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+    .cart {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: #2980b9;
+      color: white;
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<header>🛍️ شاهين إكسبريس | Sahin Express</header>
+
+<nav>
+  <button onclick="filterProducts('electronics')">📱 إلكترونيات</button>
+  <button onclick="filterProducts('fashion')">👗 ملابس وأزياء</button>
+  <button onclick="filterProducts('home')">🏠 المنزل والمطبخ</button>
+</nav>
+
+<div class="container" id="products">
+  <!-- المنتجات ستظهر هنا -->
+</div>
+
+<div class="cart" id="cart">🛒 السلة: 0 منتج</div>
+
+<script>
+  const allProducts = [
+    { name: "هاتف سامسونج مستعمل", price: 2000, category: "electronics", image: "https://via.placeholder.com/300x200?text=هاتف" },
+    { name: "لاب توب HP بحالة جيدة", price: 3500, category: "electronics", image: "https://via.placeholder.com/300x200?text=لاب+توب" },
+    { name: "جاكيت جلد رجالي", price: 300, category: "fashion", image: "https://via.placeholder.com/300x200?text=جاكيت" },
+    { name: "فستان سهرة", price: 250, category: "fashion", image: "https://via.placeholder.com/300x200?text=فستان" },
+    { name: "خلاط كهربائي", price: 150, category: "home", image: "https://via.placeholder.com/300x200?text=خلاط" },
+    { name: "طقم صحون 12 قطعة", price: 120, category: "home", image: "https://via.placeholder.com/300x200?text=صحون" }
+  ];
+
+  let cartCount = 0;
+
+  function filterProducts(category) {
+    const productContainer = document.getElementById("products");
+    productContainer.innerHTML = "";
+
+    const filtered = allProducts.filter(p => p.category === category);
+
+    filtered.forEach(product => {
+      const div = document.createElement("div");
+      div.className = "product";
+      div.innerHTML = `
+        <img src="${product.image}" alt="${product.name}">
+        <h3>${product.name}</h3>
+        <p>السعر: ${product.price} ليرة</p>
+        <button onclick="addToCart()">أضف للسلة</button>
+      `;
+      productContainer.appendChild(div);
+    });
+  }
+
+  function addToCart() {
+    cartCount++;
+    document.getElementById("cart").innerText = `🛒 السلة: ${cartCount} منتج`;
+  }
+
+  // عرض أولي - الإلكترونيات
+  filterProducts('electronics');
+</script>
+
+</body>
+</html>
